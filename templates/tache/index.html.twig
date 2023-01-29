@@ -27,6 +27,14 @@
             </tr>
         </thead>
         <tbody>
+
+         <div class="d-flex flex-row align-items-center mb-4">
+                  </div>
+                   <div class="d-flex flex-row align-items-center mb-4">
+                  </div>
+                 
+
+
         {% for tache in taches %}
             <tr>
                 <td>{{ tache.Nom }}
@@ -45,7 +53,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4"></td>
             </tr>
         {% endfor %}
         </tbody>
