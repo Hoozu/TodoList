@@ -57,6 +57,12 @@ class TacheController extends AbstractController
     #[Route('/{id}/edit', name: 'app_tache_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Tache $tache, TacheRepository $tacheRepository): Response
     {
+
+        $user = $this->getUser();
+        if ($user !== $tache->getUser()){
+            return $this->redirectToRoute('app_tache_index');
+        }
+
         $form = $this->createForm(TacheType::class, $tache);
         $form->handleRequest($request);
 
@@ -74,7 +80,14 @@ class TacheController extends AbstractController
     #[IsGranted('ROLE_USER')]
     #[Route('/{id}', name: 'app_tache_delete', methods: ['POST'])]
     public function delete(Request $request, Tache $tache, TacheRepository $tacheRepository): Response
+    
     {
+
+        $user = $this->getUser();
+        if ($user !== $tache->getUser()){
+            return $this->redirectToRoute('app_tache_index');
+        }
+
         if ($this->isCsrfTokenValid('delete'.$tache->getId(), $request->request->get('_token'))) {
             $tacheRepository->remove($tache, true);
         }
