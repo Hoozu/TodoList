@@ -37,6 +37,19 @@ class TacheController extends AbstractController
             $tache->setUser($user);
             $tacheRepository->save($tache, true);
 
+            if ($form['image']->getData()){
+                $uploadedFile = $form['image']->getData();
+                $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+                $newFilename = $tache->getId() . "" . ".jpg";
+
+                $uploadedFile->move(
+                    $destination,
+                    $newFilename
+                );
+                $tache->setImage($newFilename);
+            }
+            $tacheRepository->save($tache, true);
+
             return $this->redirectToRoute('app_tache_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -67,6 +80,19 @@ class TacheController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $tacheRepository->save($tache, true);
+            
+            if ($form['image']->getData()){
+                $uploadedFile = $form['image']->getData();
+                $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+                $newFilename = $tache->getId() . "" . ".jpg";
+
+                $uploadedFile->move(
+                    $destination,
+                    $newFilename
+                );
+                $tache->setImage($newFilename);
+            }
             $tacheRepository->save($tache, true);
 
             return $this->redirectToRoute('app_tache_index', [], Response::HTTP_SEE_OTHER);

@@ -20,6 +20,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th></th>
                 <th>Nom</th>
                 <th>Statut</th>
                 <th>Date de fin</th>
@@ -37,11 +38,13 @@
 
         {% for tache in taches %}
             <tr>
-                <td>{{ tache.Nom }}
+                <td> <img src="uploads/{{ tache.image }}" width="20px"</td>
+                <td>
+                {{ tache.Nom }}
                 <p>{{ tache.Description }} </p>
                 </td>
                 <td>{{ tache.Status}} </td>
-                <td> {{ tache.EndDate|date('d/m/Y') }} 
+                <td>{{ tache.EndDate|date('d/m/Y')}} 
                 <td>
                 <div class ="icons">
                     <a href="{{ path('app_tache_edit', {'id': tache.id}) }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">

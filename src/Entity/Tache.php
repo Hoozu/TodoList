@@ -31,6 +31,9 @@ class Tache
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $EndDate = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
 
     public function getId(): ?int
     {
@@ -96,6 +99,18 @@ class Tache
     public function setEndDate(\DateTimeInterface $EndDate): self
     {
         $this->EndDate = $EndDate;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
