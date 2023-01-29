@@ -6,6 +6,8 @@ use App\Entity\Tache;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class TacheType extends AbstractType
 {
@@ -14,7 +16,13 @@ class TacheType extends AbstractType
         $builder
             ->add('Nom')
             ->add('Description')
-            ->add('Status')
+            ->add('Status', ChoiceType::class, [
+                'choices'  => [
+                    'To do' => "To do",
+                    'Finish' => "Finish",
+                    'To do' => "To do",
+                ],
+            ])
             ->add('EndDate')
         ;
     }
