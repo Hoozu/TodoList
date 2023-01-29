@@ -26,6 +26,10 @@ class Tache
     #[ORM\Column(length: 255)]
     private ?string $DateDeFin = null;
 
+    #[ORM\ManyToOne(inversedBy: 'taches')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
 
     public function getId(): ?int
     {
@@ -76,6 +80,18 @@ class Tache
     public function setDateDeFin(string $DateDeFin): self
     {
         $this->DateDeFin = $DateDeFin;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
