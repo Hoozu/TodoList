@@ -15,7 +15,7 @@ class TacheType extends AbstractType
             ->add('Nom')
             ->add('Description')
             ->add('Status')
-            ->add('DateDeFin')
+            ->add('EndDate')
         ;
     }
 

@@ -23,12 +23,13 @@ class Tache
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $DateDeFin = null;
 
     #[ORM\ManyToOne(inversedBy: 'taches')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $EndDate = null;
 
 
     public function getId(): ?int
@@ -72,17 +73,8 @@ class Tache
         return $this;
     }
 
-    public function getDateDeFin(): ?string
-    {
-        return $this->DateDeFin;
-    }
 
-    public function setDateDeFin(string $DateDeFin): self
-    {
-        $this->DateDeFin = $DateDeFin;
-
-        return $this;
-    }
+   
 
     public function getUser(): ?User
     {
@@ -92,6 +84,18 @@ class Tache
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->EndDate;
+    }
+
+    public function setEndDate(\DateTimeInterface $EndDate): self
+    {
+        $this->EndDate = $EndDate;
 
         return $this;
     }
